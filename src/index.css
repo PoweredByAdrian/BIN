@@ -1,0 +1,27 @@
+/* src/index.css */
+/* Default styles from Vite/CRA usually go here */
+/* Example: */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  /* Colors below might be overridden by App.css */
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  /* display: flex; */ /* Remove if App controls layout */
+  /* place-items: center; */ /* Remove if App controls layout */
+  min-width: 320px;
+  min-height: 100vh;
+}
+

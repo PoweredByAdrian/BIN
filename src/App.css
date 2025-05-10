@@ -1,0 +1,94 @@
+@import 'reactflow/dist/style.css';
+@import './styles/ControlPanel/ControlPanel.css';
+@import './styles/ControlPanel/InputSection.css';
+@import './styles/ControlPanel/FileInputSection.css';
+@import './styles/ControlPanel/Error.css';
+@import './styles/Tabs/Tabs.css';
+@import './styles/Visualization/Visualization.css';
+@import './styles/Visualization/VisualizationControls.css';
+@import './styles/Visualization/EdgeAnimation.css'; /* Uncomment this line */
+@import './styles/Visualization/Nodes.css';
+@import './styles/Tabs/Informations/InfoGrid.css';
+@import './styles/Tabs/Informations/NamesSection.css';
+@import './styles/Tabs/Settings/Settings.css';
+@import './styles/Visualization/ReactFlow.css';
+@import './styles/Visualization/ReactFlowIndex.css'; /* Added this line */
+@import './styles/FileNavigator/FileListModal.css';
+@import './styles/FileNavigator/FileNavigator.css';
+@import './styles/InfoFooter.css';
+@import './styles/Tabs/Informations/InformationTabNested.css'; 
+@import './styles/Visualization/InputNode.css';
+@import './styles/Visualization/OutputNode.css';
+
+body {
+  font-family: sans-serif;
+  background-color: #282c34;
+  color: #f0f0f0;
+  margin: 0;
+  padding-top: 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  width: 95%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 1.2 Typography
+---------------------------------------------------------------------- */
+h1 {
+  color: #61dafb;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 1.3 Layout Containers
+---------------------------------------------------------------------- */
+.input-section,
+.file-input-section,
+.tabs-container,
+.error-message-box,
+.visualization-area,
+.control-panel,
+.file-navigator-container {
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-wrapper {
+  width: 100%;
+}
+
+/* Update the visualization container to maintain position */
+
+.visualization-area {
+  position: relative;
+  height: 600px;
+  width: 100%;
+  min-width: 600px;
+  /* Add margin to compensate for the footer */
+  margin-top: 16px;
+}
+
+/* Ensure the footer container doesn't cause layout shifts */
+.footer-container {
+  width: 100%;
+  height: 76px; /* 60px height + 16px margin-bottom */
+  margin: 0 auto;
+  max-width: var(--main-content-width, 100%);
+  box-sizing: border-box;
+  /* Maintain the space even if footer is hidden */
+  min-height: 76px;
+}

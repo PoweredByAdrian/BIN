@@ -1,0 +1,53 @@
+.settings-section {
+  margin-bottom: 20px;
+}
+
+.settings-section h3 {
+  color: #abb2bf;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #4f5666;
+  padding-bottom: 5px;
+}
+
+/* 6.2 Checkboxes & Options
+---------------------------------------------------------------------- */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.settings-button {
+  padding: 8px 15px;
+  background-color: #4f5666;
+  color: #f0f0f0;
+  border: 1px solid #6b7280;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: normal;
+  transition: background-color 0.2s;
+}
+
+.settings-button:hover {
+  background-color: #5a6170;
+}

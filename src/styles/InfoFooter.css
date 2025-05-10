@@ -1,0 +1,190 @@
+/* Footer styling */
+.info-footer {
+  background-color: #21252b;
+  border-top: 1px solid #181a1f;
+  color: #abb2bf;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  padding: 8px 16px;
+  min-height: 60px; /* Set a fixed minimum height */
+  height: 60px; /* Set a fixed height */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center; /* Center content horizontally */
+  gap: 16px;
+  margin-bottom: 16px;
+  overflow-y: auto; /* Allow scrolling if content exceeds fixed height */
+  box-sizing: border-box; /* Include padding in the height calculation */
+}
+
+.footer-container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: var(--main-content-width, 100%);
+  box-sizing: border-box;
+}
+
+/* Make footer full width to match visualization/tabs */
+.info-footer.full-width {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+  text-align: center; /* Center text within the footer */
+}
+
+.info-footer.empty {
+  height: 60px; /* Same height as non-empty state */
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Empty state styling */
+.empty-message {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7f848e;
+  font-style: italic;
+  height: 100%; /* Take full height of footer */
+}
+
+.info-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the hint text and icon */
+}
+
+/* Add a subtle hint icon */
+.info-hint:before {
+  content: "ℹ️";
+  margin-right: 8px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+/* Center the individual sections of information */
+.node-info, .function-info, .delay-info, .connections-info, .path-info {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content within each info block */
+  flex-wrap: nowrap;
+  margin: 0 auto; /* Center each section */
+}
+
+/* When multiple sections are present, arrange them properly */
+.info-footer > div {
+  flex: 0 1 auto; /* Allow elements to shrink but not grow */
+  white-space: nowrap; /* Keep text on one line */
+}
+
+/* For larger screens, create a more balanced layout */
+@media (min-width: 769px) {
+  .info-footer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .info-footer > div:not(:last-child)::after {
+    content: "•";
+    margin-left: 16px;
+    color: #4b5263;
+    opacity: 0.7;
+  }
+}
+
+.info-label {
+  font-weight: 600;
+  color: #d7dae0;
+  margin-right: 6px;
+}
+
+.node-id {
+  padding: 2px 8px;
+  background-color: #2c313a;
+  border-radius: 4px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Function type styles with color coding by category */
+.function-type {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 6px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  background-color: rgba(97, 175, 239, 0.15);
+  color: #61afef;
+  border: 1px solid rgba(97, 175, 239, 0.3);
+}
+
+/* Remove these category-specific styles
+.function-type.arithmetic { ... }
+.function-type.trigonometric { ... }
+.function-type.logical { ... }
+.function-type.comparison { ... }
+.function-type.conditional { ... }
+.function-type.unknown { ... }
+*/
+
+.function-description {
+  color: #7f848e;
+  font-style: italic;
+}
+
+.delay-value {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  color: #61afef;
+}
+
+.connections-info {
+  display: flex;
+  align-items: center;
+}
+
+.connections-list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.connection-item {
+  background-color: rgba(97, 175, 239, 0.1);
+  border: 1px solid rgba(97, 175, 239, 0.2);
+  border-radius: 3px;
+  padding: 0 4px;
+  color: #61afef;
+  font-size: 13px;
+}
+
+.path-count {
+  color: #61afef;
+  font-weight: 600;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .info-footer {
+    flex-direction: column;
+    align-items: center; /* Center items vertically on small screens */
+    gap: 8px;
+    padding: 8px 12px;
+  }
+  
+  .connections-info {
+    flex-direction: column;
+    align-items: center; /* Center on small screens */
+  }
+  
+  .info-footer > div:not(:last-child)::after {
+    display: none; /* Remove dividers on small screens */
+  }
+
+  .connections-list {
+    justify-content: center; /* Center connection items */
+  }
+}

@@ -1,0 +1,140 @@
+.file-list-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.file-list-modal {
+    background-color: #282c34;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: modal-fade-in 0.3s ease;
+}
+
+@keyframes modal-fade-in {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.file-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #4f5666;
+}
+
+.file-list-header h3 {
+    margin: 0;
+    color: #61dafb;
+    font-size: 1.2em;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #abb2bf;
+    cursor: pointer;
+    font-size: 1.1em;
+    padding: 5px;
+}
+
+.close-button:hover {
+    color: #f0f0f0;
+}
+
+.file-search {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #21252b;
+    border-bottom: 1px solid #4f5666;
+}
+
+.file-search svg {
+    color: #abb2bf;
+    margin-right: 10px;
+}
+
+.file-search input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: #f0f0f0;
+    padding: 8px 0;
+    font-size: 0.9em;
+    outline: none;
+}
+
+.file-search input::placeholder {
+    color: #6b7280;
+}
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.file-list li {
+    padding: 12px 20px;
+    border-bottom: 1px solid #3a3f4b;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.file-list li:hover {
+    background-color: #3a3f4b;
+}
+
+.file-list li.active {
+    background-color: #2c313a;
+    border-left: 4px solid #61afef;
+}
+
+.file-list-name {
+    color: #abb2bf;
+    font-weight: medium;
+    display: block;
+}
+
+li.active .file-list-name {
+    color: #61afef;
+    font-weight: bold;
+}
+
+.file-list-meta {
+    font-size: 0.8em;
+    color: #6b7280;
+    display: block;
+    margin-top: 4px;
+}
+
+.no-results {
+    color: #6b7280;
+    text-align: center;
+    font-style: italic;
+    cursor: default !important;
+}
+
+.file-list-footer {
+    padding: 10px 15px;
+    border-top: 1px solid #4f5666;
+    color: #6b7280;
+    font-size: 0.85em;
+    text-align: center;
+}

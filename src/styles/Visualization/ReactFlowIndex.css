@@ -1,0 +1,30 @@
+/* Z-INDEX MANAGEMENT FOR REACT FLOW ELEMENTS */
+
+/* Set up the ReactFlow parent with its own stacking context */
+.react-flow {
+  position: relative;
+  z-index: 0; /* Create a new stacking context */
+}
+
+/* Force highlighted edges above everything */
+.react-flow__edge.mouse-highlighted-edge {
+  z-index: 1000 !important;
+  position: relative;
+}
+
+/* This ensures highlighted edges appear above nodes */
+.react-flow__renderer {
+  position: relative;
+}
+
+/* Add a higher z-index to highlighted path elements */
+.react-flow__edge.highlighted .react-flow__edge-path {
+  filter: drop-shadow(0 0 4px #ff6f00) !important;
+  stroke-width: 4px !important;
+}
+
+/* Add a light stroke to ensure visibility */
+.react-flow__edge.mouse-highlighted-edge .react-flow__edge-path {
+  stroke-width: 4px !important;
+  filter: drop-shadow(0 0 3px rgba(255, 111, 0, 0.8)) !important;
+}

@@ -1,0 +1,141 @@
+.file-navigator {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #333842;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background-color: #4f5666;
+    color: #f0f0f0;
+    border: 1px solid #6b7280;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: normal;
+    transition: background-color 0.2s;
+}
+
+.nav-button:hover:not(:disabled) {
+    background-color: #5a6170;
+}
+
+.nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.prev-button {
+    margin-right: 10px;
+}
+
+.next-button {
+    margin-left: 10px;
+}
+
+.file-list-button {
+    padding: 8px 10px;
+}
+
+.file-info {
+    flex: 1;
+    text-align: center;
+    overflow: hidden;
+}
+
+.file-name {
+    font-size: 1em;
+    font-weight: bold;
+    color: #61afef;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.file-position {
+    font-size: 0.75em;
+    color: #abb2bf;
+    margin-top: 4px;
+}
+
+.diff-toggle {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.diff-toggle-button {
+    background-color: #4f5666;
+    color: #f0f0f0;
+    border: 1px solid #6b7280;
+    border-radius: 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+}
+
+.diff-toggle-button:hover {
+    background-color: #5a6170;
+}
+
+.diff-toggle-button.active {
+    background-color: #e06c75;
+    border-color: #e06c75;
+}
+
+.file-navigator-container {
+    margin: 15px 0;
+}
+
+/* Control panel styling */
+.control-panel {
+    margin-bottom: 20px;
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.reset-button {
+    background-color: #4f5666;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+    background-color: #5a6170;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-format-hint {
+    font-size: 12px;
+    color: #abb2bf;
+    margin-top: 4px;
+}

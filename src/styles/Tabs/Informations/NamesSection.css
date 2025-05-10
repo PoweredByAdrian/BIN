@@ -1,0 +1,84 @@
+.names-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #4f5666;
+}
+
+.names-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #61afef;
+  font-size: 18px;
+}
+
+.names-section h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #e06c75;
+  font-size: 16px;
+}
+
+.names-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.names-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.name-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.name-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  margin-bottom: 5px;
+  background-color: #2d313a;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.name-index {
+  color: #abb2bf;
+  margin-right: 10px;
+}
+
+.name-value {
+  color: #98c379;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.name-list.editable li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name-input {
+  background-color: #21252b;
+  border: 1px solid #4f5666;
+  border-radius: 4px;
+  color: #98c379;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  padding: 4px 8px;
+  width: 150px;
+  transition: border-color 0.2s;
+}
+
+.name-input:focus {
+  border-color: #61afef;
+  outline: none;
+}
+
+.name-input:hover:not(:focus) {
+  border-color: #6b7280;
+}

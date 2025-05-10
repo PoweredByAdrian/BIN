@@ -1,0 +1,38 @@
+.output-node {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-weight: bold;
+    border: 2px solid #e74c3c;
+    width: 80px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.output-node:hover {
+    border-color: #f39c12;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+}
+
+.output-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Target the React Flow node container directly */
+.react-flow__node.react-flow__node-output {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    /* Override any other React Flow styling */
+    opacity: 1 !important;
+}
+
+/* Make sure our styling takes precedence */
+.react-flow__node .output-node {
+    /* Your existing output-node styles */
+    position: relative;
+    /* Removed z-index: 1; */
+}

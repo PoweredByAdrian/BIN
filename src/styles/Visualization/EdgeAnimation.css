@@ -1,0 +1,74 @@
+/* EDGE ANIMATIONS AND STYLING */
+
+/* Define CSS Variables for controlling stacking order */
+:root {
+  --edge-z-index: auto;
+  --highlighted-edge-z-index: 1000;
+}
+
+/* Animation keyframes for edge animations */
+@keyframes flowAnimation {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+/* Base edge style */
+.react-flow__edge .react-flow__edge-path {
+  stroke: #5bc0de;
+  stroke-width: 1.5px;
+  z-index: var(--edge-z-index);
+}
+
+/* Output edge style */
+.react-flow__edge.output-edge .react-flow__edge-path {
+  filter: drop-shadow(0 0 1px rgba(230, 126, 34, 0.3));
+}
+
+/* Mouse highlighted edge - Orange style (highest priority) */
+.react-flow__edge.mouse-highlighted-edge {
+  z-index: var(--highlighted-edge-z-index) !important;
+}
+
+.react-flow__edge.mouse-highlighted-edge .react-flow__edge-path,
+.react-flow__edge[data-highlighted="true"] .react-flow__edge-path {
+  stroke: #ff6f00 !important;
+  stroke-width: 3px !important;
+  stroke-dasharray: none !important;
+  animation: none !important;
+  filter: drop-shadow(0 0 3px rgba(255, 111, 0, 0.5)) !important;
+}
+
+/* Active node edge - Green style (medium priority) */
+.react-flow__edge.active-highlighted-edge .react-flow__edge-path,
+.react-flow__edge[data-active="true"] .react-flow__edge-path {
+  stroke: #2ecc71 !important;
+  stroke-width: 3px !important;
+  stroke-dasharray: 5 3 !important;
+  animation: flowAnimation 1s linear infinite !important;
+  filter: drop-shadow(0 0 2px rgba(46, 204, 113, 0.6)) !important;
+}
+
+/* Edge animation when connected to active nodes */
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5 3;
+  animation: flowAnimation 1s linear infinite;
+}
+
+/* Animation based on edge types */
+.react-flow__edge.input-to-active .react-flow__edge-path {
+  stroke: #3498db; /* Blue input edges */
+  animation: flowAnimation 1s linear infinite;
+}
+
+.react-flow__edge.active-to-output .react-flow__edge-path {
+  stroke: #e74c3c; /* Red output edges */
+  animation: flowAnimation 1s linear infinite;
+}
+
+.react-flow__edge.active-to-active .react-flow__edge-path {
+  stroke: #27ae60; /* Dark green active-to-active edges */
+  animation: flowAnimation 1s linear infinite;
+}
+
+/* Add specific edge styling for each node state combination if needed */

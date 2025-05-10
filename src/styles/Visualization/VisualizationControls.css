@@ -1,0 +1,42 @@
+.viz-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+}
+
+.highlight-toggle {
+  background-color: #333842;
+  color: #abb2bf;
+  border: 1px solid #4f5666;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.highlight-toggle.enabled {
+  background-color: rgba(97, 175, 239, 0.15);
+  border-color: #61afef;
+  color: #61afef;
+}
+
+.highlight-toggle.disabled {
+  background-color: rgba(229, 192, 123, 0.1);
+  border-color: #e5c07b;
+  color: #e5c07b;
+}
+
+.highlight-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-toggle:active {
+  transform: translateY(0);
+}

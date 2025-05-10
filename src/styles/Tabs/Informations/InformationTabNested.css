@@ -1,0 +1,158 @@
+/* Nested Tabs Styling */
+.nested-tabs-container {
+
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.nested-tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #4f5666;
+    margin: 0 10px;
+}
+
+.nested-tab-buttons {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #4f5666 #21252b;
+}
+
+.nested-tab-button {
+    background: transparent;
+    border: none;
+    color: #abb2bf;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+}
+
+.nested-tab-button:hover {
+    color: #d7dae0;
+}
+
+.nested-tab-button.active {
+    color: #61afef;
+    border-bottom-color: #61afef;
+}
+
+.nested-tab-content {
+    padding: 15px;
+    animation: fadeInContent 0.3s ease;
+}
+
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Existing/Modified Information Tab Styles */
+.information-tab {
+    padding: 0;
+    border: none;
+}
+
+.info-grid {
+    display: flex;
+    gap: 20px;
+}
+
+.info-column {
+    flex: 1;
+}
+
+.info-column dt {
+    color: #abb2bf;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.info-column dd {
+    color: #98c379;
+    margin: 0;
+    font-weight: 600;
+}
+
+.vertical-line {
+    width: 1px;
+    background-color: #4f5666;
+    margin: 0 10px;
+}
+
+.names-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.names-column {
+    flex: 1;
+    min-width: 250px;
+}
+
+.names-column h4 {
+    color: #e06c75;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.name-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.name-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    background-color: #21252b;
+    border-radius: 4px;
+}
+
+.name-index {
+    color: #abb2bf;
+}
+
+.name-value {
+    color: #98c379;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+/* Statistics Tab Styles */
+.statistics-container {
+    padding: 5px;
+}
+
+.statistics-container h4 {
+    color: #e06c75;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.stats-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background-color: #21252b;
+    border-radius: 4px;
+}
+
+.stats-item span:first-child {
+    color: #abb2bf;
+}
+
+.stats-item span:last-child {
+    color: #61afef;
+    font-weight: bold;
+}

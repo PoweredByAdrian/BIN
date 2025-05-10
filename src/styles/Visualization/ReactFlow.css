@@ -1,0 +1,47 @@
+/* REACT FLOW COMPONENT OVERRIDES */
+
+/* Node base styling */
+.react-flow__node {
+  font-size: 11px;
+  border-radius: 4px;
+  border: 1px solid #777;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Node selection styling */
+.react-flow__node.selected {
+  box-shadow: 0 0 0 2px #61dafb;
+}
+
+/* Handle styling (connection points) */
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid #555;
+}
+
+/* Handle state styling */
+.react-flow__handle-connecting {
+  background: #ff6f00 !important;
+}
+
+.react-flow__handle-valid {
+  background: #55dd99 !important;
+}
+
+/* Attribution (ReactFlow logo) */
+.react-flow__attribution {
+  background: rgba(45, 49, 58, 0.8);
+}
+
+/* Background styling */
+.react-flow__background {
+  background-color: #2d313a;
+}
+
+.react-flow__edge path {
+  stroke: #5bc0de;
+  stroke-width: 1.5;
+}

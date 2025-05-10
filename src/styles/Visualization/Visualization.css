@@ -1,0 +1,347 @@
+/* Add this stylesheet import to your Visualization.jsx */
+
+
+/* Then create this file with the following styles */
+.mouse-highlighted-edge {
+    stroke: #ff6f00 !important;
+    stroke-width: 3px !important;
+    filter: drop-shadow(0 0 3px rgba(255, 111, 0, 0.5));
+}
+
+.active-highlighted-edge {
+    stroke: #2ecc71 !important;
+    stroke-width: 2px !important;
+}
+
+.output-edge {
+    stroke: #3498db !important;
+    stroke-width: 1.8px !important;
+}
+
+/* Animation for highlighted edges */
+/* 
+.react-flow__edge.animated path,
+.animated .react-flow__edge-path {
+  stroke-dasharray: 5 !important;
+  animation: dashdraw 0.5s linear infinite !important;
+}
+
+@keyframes dashdraw {
+  from {
+    stroke-dashoffset: 10;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+*/
+
+/* Global edge styling */
+.react-flow__edge path {
+  transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s;
+}
+
+/* Target both the edge container and path directly for maximum compatibility */
+.react-flow__edge.mouse-highlighted-edge path,
+.mouse-highlighted-edge .react-flow__edge-path {
+  stroke: #ff6f00 !important;
+  stroke-width: 3px !important;
+  stroke-dasharray: none !important; /* Ensure no dashes */
+  animation: none !important; /* Ensure no animation */
+}
+
+.react-flow__edge.active-highlighted-edge path,
+.active-highlighted-edge .react-flow__edge-path {
+  stroke: #2ecc71 !important;
+  stroke-width: 2px !important; 
+}
+
+.react-flow__edge.output-edge path,
+.output-edge .react-flow__edge-path {
+  stroke: #3498db !important;
+  stroke-width: 1.8px !important;
+}
+
+/* Animation for highlighted edges */
+/* 
+.react-flow__edge.animated path,
+.animated .react-flow__edge-path {
+  stroke-dasharray: 5 !important;
+  animation: dashdraw 0.5s linear infinite !important;
+}
+*/
+
+/* General container styles */
+.visualization-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.viz-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    /* Removed z-index: 50; */
+}
+
+.highlight-toggle {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.highlight-toggle.enabled {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.highlight-toggle.disabled {
+    background-color: #7f8c8d;
+    color: white;
+}
+
+/* Global edge styling with important to override React Flow defaults */
+.react-flow__edge .react-flow__edge-path {
+    transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s;
+}
+
+/* Edge styles - use very specific selectors with !important to ensure they apply */
+.react-flow__edge.mouse-highlighted-edge .react-flow__edge-path,
+.react-flow__edge.mouse-highlighted-edge path {
+    stroke: #ff6f00 !important;
+    stroke-width: 3px !important;
+    filter: drop-shadow(0 0 3px rgba(255, 111, 0, 0.5));
+}
+
+.react-flow__edge.active-highlighted-edge .react-flow__edge-path,
+.react-flow__edge.active-highlighted-edge path {
+    stroke: #2ecc71 !important;
+    stroke-width: 2px !important;
+}
+
+/* Animation for highlighted edges */
+/* 
+.react-flow__edge.animated .react-flow__edge-path {
+    stroke-dasharray: 5;
+    animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+    from {
+        stroke-dashoffset: 10;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+*/
+
+/* Add or update these animation styles in your CSS file */
+@keyframes flowAnimation {
+  0% {
+    stroke-dashoffset: 20;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.react-flow__edge.active-highlighted-edge .react-flow__edge-path {
+  stroke-dasharray: 5 3; /* Creates a dashed line with 5px dashes and 3px gaps */
+  animation: flowAnimation 1s linear infinite;
+}
+
+/* Update the active highlighted edge styling */
+.react-flow__edge.active-highlighted-edge .react-flow__edge-path,
+.react-flow__edge.active-highlighted-edge path {
+    stroke: #2ecc71 !important;
+    stroke-width: 3px !important; /* Increased from 2px to 3px */
+    filter: drop-shadow(0 0 2px rgba(46, 204, 113, 0.6)) !important; /* Add subtle glow */
+    stroke-dasharray: 5 3; /* Creates a dashed line with 5px dashes and 3px gaps */
+    animation: flowAnimation 1s linear infinite;
+    /* Removed z-index: 10 !important; */
+}
+
+/* Make sure orange highlights remain above green highlights */
+.react-flow__edge.mouse-highlighted-edge .react-flow__edge-path,
+.react-flow__edge.mouse-highlighted-edge path {
+    stroke: #ff6f00 !important;
+    stroke-width: 3px !important;
+    filter: drop-shadow(0 0 3px rgba(255, 111, 0, 0.5)) !important;
+    /* Removed z-index: 20 !important; */
+    stroke-dasharray: none !important; /* Ensure no dashes */
+    animation: none !important; /* Ensure no animation */
+}
+
+/* Remove all the z-index declarations */
+/* 
+.react-flow__edge {
+  z-index: 5;
+}
+
+.react-flow__node {
+  z-index: 4;
+} 
+*/
+
+/* -------------------------------------------------
+ * Container and Control Styles
+ * ------------------------------------------------- */
+.visualization-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.viz-controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    /* Removed z-index: 50; */
+}
+
+.highlight-toggle {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.highlight-toggle.enabled {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.highlight-toggle.disabled {
+    background-color: #7f8c8d;
+    color: white;
+}
+
+/* -------------------------------------------------
+ * Edge Styling - Base Styles
+ * ------------------------------------------------- */
+.react-flow__edge path {
+    transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s;
+}
+
+.react-flow__edge .react-flow__edge-path {
+    stroke: #95a5a6;  /* Default color */
+    stroke-width: 1.5px;
+}
+
+/* Output edge styling */
+.react-flow__edge.output-edge .react-flow__edge-path {
+    stroke: #3498db !important;
+    stroke-width: 1.8px !important;
+}
+
+/* -------------------------------------------------
+ * Edge Highlighting - Hover (Orange)
+ * ------------------------------------------------- */
+.react-flow__edge.mouse-highlighted-edge .react-flow__edge-path {
+    stroke: #ff6f00 !important;
+    stroke-width: 3px !important;
+    stroke-dasharray: none !important;
+    animation: none !important;
+    filter: drop-shadow(0 0 3px rgba(255, 111, 0, 0.5)) !important;
+    /* Removed z-index: 20 !important; */
+}
+
+/* -------------------------------------------------
+ * Edge Highlighting - Active Nodes (Green)
+ * ------------------------------------------------- */
+.react-flow__edge.active-highlighted-edge .react-flow__edge-path {
+    stroke: #2ecc71 !important;
+    stroke-width: 3px !important;
+    stroke-dasharray: 5 3 !important;
+    animation: flowAnimation 1s linear infinite !important;
+    filter: drop-shadow(0 0 2px rgba(46, 204, 113, 0.6)) !important;
+    /* Removed z-index: 10 !important; */
+}
+
+/* -------------------------------------------------
+ * Animation Keyframes
+ * ------------------------------------------------- */
+@keyframes flowAnimation {
+    0% {
+        stroke-dashoffset: 20;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* -------------------------------------------------
+ * Z-Index Layering - SECTION REMOVED
+ * ------------------------------------------------- */
+/* Removed all z-index declarations from this section */
+
+/* VISUALIZATION CONTAINER STYLES */
+.visualization-area {
+  border: 1px solid #4f5666;
+  background-color: #2d313a;
+  margin-bottom: 20px;
+  padding: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+  width: 100%;
+}
+
+.visualization-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* VISUALIZATION CONTROLS */
+.viz-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  /* Removed z-index: 5; */
+  display: flex;
+  gap: 8px;
+}
+
+.highlight-toggle {
+  background-color: #333842;
+  color: #abb2bf;
+  border: 1px solid #4f5666;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.highlight-toggle.enabled {
+  background-color: rgba(97, 175, 239, 0.15);
+  border-color: #61afef;
+  color: #61afef;
+}
+
+.highlight-toggle.disabled {
+  background-color: rgba(229, 192, 123, 0.1);
+  border-color: #e5c07b;
+  color: #e5c07b;
+}
+
+.highlight-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.highlight-toggle:active {
+  transform: translateY(0);
+}

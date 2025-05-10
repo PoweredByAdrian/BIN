@@ -1,0 +1,16 @@
+/* ERROR MESSAGES STYLING */
+.error-message-box {
+  background-color: #5c282d;
+  color: #e06c75;
+  border: 1px solid #e06c75;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  max-width: 900px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.error-message-box strong {
+  color: #ff9a9e;
+}

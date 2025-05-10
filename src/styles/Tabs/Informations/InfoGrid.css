@@ -1,0 +1,46 @@
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.info-grid dt {
+  font-weight: bold;
+  text-align: left;
+  color: #f0f0f0;
+}
+
+.info-grid dd {
+  margin-left: 0;
+  text-align: right;
+}
+
+.info-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-column > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-column dt {
+  font-weight: bold;
+  color: #f0f0f0;
+  margin: 0;
+}
+
+.info-column dd {
+  margin: 0;
+  color: #abb2bf;
+  text-align: right;
+}
+
+.vertical-line {
+  background-color: #4f5666;
+  width: 1px;
+  height: 100%;
+}

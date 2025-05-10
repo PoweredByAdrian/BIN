@@ -1,0 +1,196 @@
+/* Base styling for CGP nodes */
+.react-flow__node-cgpNode {
+  padding: 0;
+  border: none;
+  background: none;
+  width: auto;
+  min-height: auto;
+  font-size: 10px;
+  text-align: center;
+}
+
+/* Node container styling - ADD A CONSISTENT BORDER */
+.cgp-node {
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 10px;
+  color: #333;
+  text-align: center;
+  position: relative;
+  transition: all 0.2s ease;
+  background: #fff;
+  
+  /* IMPORTANT - Use consistent border width with outline instead */
+  border: 1px solid transparent; /* Keep a consistent 1px border */
+  outline: 2px solid transparent; /* Use outline for the colored border */
+  outline-offset: 0px; /* Keep outline tight to the border */
+  will-change: box-shadow;
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+/* Node state variations - USING OUTLINE INSTEAD OF BORDER */
+/* Default state for inactive defined nodes */
+.cgp-node.inactive-defined {
+  /* border: 2px solid #555; */
+  outline: 2px solid #555;
+}
+
+/* Default state for undefined nodes */
+.cgp-node.undefined-node {
+  /* Border remains 1px transparent */
+}
+
+/* Active node styling (green) - medium priority */
+.cgp-node.active {
+  /* border: 3px solid #2ecc71; */
+  outline: 3px solid #2ecc71;
+  background: #f0fff4;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.6);
+}
+
+/* Highlighted node styling (orange) - HIGHEST priority to override active state */
+.cgp-node.highlighted {
+  /* border: 3px solid #ff6f00 !important; */
+  outline: 3px solid #ff6f00 !important;
+  box-shadow: 0 0 8px 2px #ff6f00 !important;
+  background: #fff9f0 !important; /* Light orange background */
+}
+
+/* Specific styling for nodes that are both active AND highlighted */
+.cgp-node.active.highlighted {
+  /* border: 3px solid #ff6f00 !important; */
+  outline: 3px solid #ff6f00 !important;
+  background: #fff3e0 !important; /* A slightly deeper orange background than normal highlighted */
+  box-shadow: 0 0 10px 3px #ff6f00 !important; /* Stronger glow */
+}
+
+/* Handles styling */
+.cgp-node .input-handle,
+.cgp-node .output-handle {
+  width: 8px;
+  height: 8px;
+}
+
+/* Input handle colors - consistent regardless of node state */
+.cgp-node .input-handle {
+  background: #2ecc71;
+  border: 1px solid #2ecc71;
+}
+
+.cgp-node .input-handle.active {
+  background: #27ae60;
+  border: 2px solid #27ae60;
+}
+
+/* Output handle colors - consistent regardless of node state */
+.cgp-node .output-handle {
+  background: #e67e22;
+  border: 1px solid #e67e22;
+}
+
+.cgp-node .output-handle.active {
+  background: #d35400;
+  border: 2px solid #d35400;
+}
+
+/* Function ID styling in the middle */
+.cgp-node .function-id {
+  position: absolute;
+  font-size: 20px;
+  font-weight: bold;
+  color: #e74c3c;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  text-shadow: 0 0 1px rgba(0,0,0,0.2);
+}
+
+.cgp-node .function-id.active {
+  color: #c0392b;
+  text-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+/* Override function ID color for highlighted state - but KEEP NODE INDEX CONSISTENT */
+.cgp-node.highlighted .function-id,
+.cgp-node.active.highlighted .function-id {
+  color: #ff5722 !important; /* Deeper orange for better contrast */
+  text-shadow: 0 0 3px rgba(255, 111, 0, 0.3) !important;
+}
+
+/* Node index styling in the bottom right */
+.cgp-node .node-index {
+  position: absolute;
+  bottom: 0px;
+  right: 4px;
+  font-size: 20px !important; /* Force consistent font size */
+  font-weight: bold;
+  color: #3498db;
+  pointer-events: none;
+  text-align: center;
+  width: auto;
+  height: auto;
+  min-width: 22px;
+  min-height: 22px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  transform: none !important; /* Prevent any transforms */
+}
+
+/* REMOVE this active state styling completely since it changes the font size */
+/*
+.cgp-node.active:not(.highlighted) .node-index {
+  color: #2980b9;
+  font-size: 22px;
+}
+*/
+
+/* Instead, just change the color for active nodes without changing size */
+.cgp-node.active .node-index {
+  color: #2980b9;
+}
+
+/* Add specific rule for highlighted nodes to ensure consistent size */
+.cgp-node.highlighted .node-index,
+.cgp-node.active.highlighted .node-index {
+  color: #ff6f00 !important; /* Orange color for highlighted nodes */
+  font-size: 20px !important; /* Same size as non-highlighted */
+  font-weight: bold;
+}
+
+/* Make sure no animations or transitions affect the node index */
+.cgp-node, 
+.cgp-node.active,
+.cgp-node.highlighted,
+.cgp-node .node-index {
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, outline 0.2s ease !important;
+  /* Only transition these specific properties, not font-size */
+}
+
+/* Force consistency in case of other conflicting styles */
+.cgp-node * {
+  transform-origin: center !important;
+}
+
+/* Remove empty header */
+.cgp-node .node-header {
+  display: none;
+}
+
+/* Revise the pulse animation to only affect shadow, not position or size */
+@keyframes highlightPulse {
+  0% {
+    box-shadow: 0 0 8px 2px rgba(255, 111, 0, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 12px 3px rgba(255, 111, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 8px 2px rgba(255, 111, 0, 0.6);
+  }
+}
+
+.cgp-node.active.highlighted {
+  animation: highlightPulse 1.5s infinite;
+}

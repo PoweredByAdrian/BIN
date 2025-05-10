@@ -1,0 +1,80 @@
+/* TABS SYSTEM STYLING */
+.tabs-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #4f5666;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+}
+
+.tab-buttons {
+  display: flex;
+}
+
+.tab-button {
+  padding: 10px 15px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: #abb2bf;
+  font-size: 0.95em;
+  border-bottom: 3px solid transparent;
+  margin-right: 5px;
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.tab-button:hover {
+  color: #f0f0f0;
+}
+
+.tab-button.active {
+  color: #61dafb;
+  border-bottom-color: #61dafb;
+  font-weight: bold;
+}
+
+.tab-toggle-button {
+  background-color: transparent;
+  border: 1px solid #4f5666;
+  color: #abb2bf;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+}
+
+.tab-toggle-button:hover {
+  background-color: #4f5666;
+  color: #f0f0f0;
+}
+
+.tab-content {
+  padding: 20px;
+  background-color: #333842;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #4f5666;
+  border-top: none;
+  min-height: 150px;
+  color: #abb2bf;
+  margin-top: -2px;
+}
+
+.tab-content p {
+  margin: 0;
+  color: #abb2bf;
+  font-size: 1em;
+  text-align: center;
+}
+
+.tab-content h2 {
+  color: #61dafb;
+  margin-top: 0;
+  font-size: 1.5em;
+  text-align: center;
+}
