@@ -20,9 +20,10 @@
 
 .footer-container {
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 16px;
   max-width: var(--main-content-width, 100%);
   box-sizing: border-box;
+  transition: height 0.3s ease, opacity 0.3s ease;
 }
 
 /* Make footer full width to match visualization/tabs */
@@ -187,4 +188,9 @@
   .connections-list {
     justify-content: center; /* Center connection items */
   }
+}
+
+/* Add class for visualization container */
+.visualization-container {
+  transition: margin-top 0.3s ease;
 }

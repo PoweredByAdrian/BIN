@@ -43,23 +43,94 @@
   flex-direction: column;
   flex-grow: 1;
   min-width: 0;
+  flex: 1;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper.expanded .cgp-input-field {
+  min-height: 80px;
+  white-space: pre-wrap;    /* Allow wrapping when focused/expanded */
+  text-overflow: clip;      /* Don't need ellipsis when expanded */
+}
+
+.input-wrapper:not(.expanded)::after {
+  content: "...";
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: #21252b;
+  padding: 0 5px;
+  color: #7f848e;
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none; /* Allow clicking through to the textarea */
+  opacity: 0; /* Hidden by default */
+}
+
+/* Show truncation indicator only when the text is actually truncated */
+.input-wrapper:not(.expanded).text-truncated::after {
+  opacity: 1;
 }
 
 .input-format-hint {
-  font-size: 11px;
-  line-height: 1.4;
-  color: #abb2bf;
+  font-size: 12px; /* Reduced from 12px */
+  line-height: 1.2; /* Reduced from 1.4 */
+  color: #7f848e;
   background-color: rgba(97, 175, 239, 0.05);
   border-radius: 4px;
   border-left: 3px solid #61afef;
   display: flex;
+  flex-wrap: wrap; /* Allow wrapping for better space usage */
   align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-  padding: 6px 10px;
+  gap: 4px; /* Reduced from 8px */
+  margin-top: 4px; /* Reduced from 6px */
+  padding: 4px 7px; /* Reduced from 6px 10px */
 }
 
+.input-format-hint code {
+  font-family: 'Consolas', 'Monaco', monospace;
+  background-color: rgba(35, 39, 47, 0.5);
+  padding: 0px 3px; /* Reduced from 1px 4px */
+  border-radius: 2px; /* Reduced from 3px */
+  margin: 0 1px; /* Reduced from 0 2px */
+  color: #abb2bf;
+  font-size: 11px; /* Added to make code blocks smaller */
+  white-space: nowrap; /* Prevent breaking inside code blocks */
+}
+
+/* Optional: Remove the info icon to save space */
 .input-format-hint:before {
   content: "ℹ️";
+  display: inline;
+}
+
+.cgp-input-field {
+  width: calc(100% - 10px);  /* Fixed calculation syntax */
+  border: 1px solid #3e4452;
+  background-color: #21252b;
+  color: #abb2bf;
+  padding: 5px 5px;
+  border-radius: 4px;
   font-size: 14px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  text-overflow: ellipsis;  /* Add ellipsis for text overflow */
+  white-space: nowrap;      /* Prevent wrapping when not focused */
+}
+
+.cgp-input-field:focus {
+  outline: none;
+  border-color: #61afef;
+  box-shadow: 0 0 0 1px rgba(97, 175, 239, 0.3);
+}
+
+.input-format-container {
+  position: relative;
+  margin-top: 2px; /* Reduced from 4px */
+  z-index: 5;
+  width: 100%;
 }

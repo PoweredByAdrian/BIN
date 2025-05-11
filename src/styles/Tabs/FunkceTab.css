@@ -1,0 +1,180 @@
+.funkce-tab {
+  padding: 15px;
+}
+
+.tab-title {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #e6e6e6;
+  font-size: 24px;
+}
+
+.config-section {
+  background-color: rgba(45, 49, 58, 0.4);
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.config-section h3 {
+  margin-top: 0;
+  color: #e6e6e6;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.save-config-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.config-name-input {
+  flex: 1;
+  background-color: #21252b;
+  border: 1px solid #3e4452;
+  color: #abb2bf;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.config-name-input:focus {
+  outline: none;
+  border-color: #61afef;
+  box-shadow: 0 0 0 1px rgba(97, 175, 239, 0.3);
+}
+
+.save-config-button,
+.import-button,
+.action-button {
+  background-color: #2c313a;
+  color: #abb2bf;
+  border: 1px solid #3e4452;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-config-button:hover,
+.import-button:hover,
+.action-button:hover {
+  background-color: #353b45;
+}
+
+.save-config-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.import-button {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.message.success {
+  background-color: rgba(152, 195, 121, 0.2);
+  color: #98c379;
+  border: 1px solid rgba(152, 195, 121, 0.4);
+}
+
+.message.error {
+  background-color: rgba(224, 108, 117, 0.2);
+  color: #e06c75;
+  border: 1px solid rgba(224, 108, 117, 0.4);
+}
+
+.configs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.config-item {
+  background-color: #21252b;
+  border-radius: 4px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.config-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-name {
+  font-weight: bold;
+  color: #e6e6e6;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.config-date {
+  color: #7f848e;
+  font-size: 12px;
+}
+
+.config-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-button {
+  padding: 6px;
+  font-size: 12px;
+}
+
+.action-button.load {
+  color: #61afef;
+}
+
+.action-button.export {
+  color: #98c379;
+}
+
+.action-button.delete {
+  color: #e06c75;
+}
+
+.no-configs {
+  color: #7f848e;
+  font-style: italic;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Make sure import section looks good */
+.import-config {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Add a specific styling for the section that explains what's being saved */
+.config-description {
+  margin-top: 8px;
+  color: #7f848e;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.config-description ul {
+  margin: 6px 0 0 20px;
+  padding: 0;
+}
+
+.config-description li {
+  margin-bottom: 4px;
+}

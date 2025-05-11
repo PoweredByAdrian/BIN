@@ -1,0 +1,57 @@
+.error-message-container {
+  background-color: rgba(224, 108, 117, 0.1);
+  border-left: 4px solid #e06c75;
+  color: #e06c75;
+  padding: 15px 20px;
+  margin: 15px 0;
+  border-radius: 0 4px 4px 0;
+  width: 100%; /* Make it take up more space */
+  max-width: 1200px; /* Set a reasonable max-width */
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.error-message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.error-message-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.error-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.error-message-content {
+  padding-left: 30px;
+}
+
+.error-main {
+  margin: 0 0 8px 0;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.error-detail {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.5;
+  white-space: pre-wrap; /* Preserve line breaks in details */
+}
+
+/* Add this class for visualization area error placement */
+.visualization-error {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: 90%;
+}

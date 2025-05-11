@@ -5,6 +5,7 @@ import { FaUpload } from 'react-icons/fa';
 const ControlPanel = ({ cgpString, onStringChange, onFileChange, onResetExample, onResetNames }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   
   const handleInputChange = (value) => {
     onStringChange(value);
@@ -51,17 +52,24 @@ const ControlPanel = ({ cgpString, onStringChange, onFileChange, onResetExample,
     <div className="control-panel">
       <div className="input-section with-hint">
         <label htmlFor="cgp-input">CGP String:</label>
-        <div className="input-wrapper">
-          <input
+        <div className={`input-wrapper ${isInputFocused ? 'expanded' : ''}`}>
+          <textarea
             id="cgp-input"
-            type="text"
             value={cgpString}
             onChange={(e) => handleInputChange(e.target.value)}
+            onFocus={() => setIsInputFocused(true)}
+            onBlur={() => setIsInputFocused(false)}
             placeholder="Enter CGP string"
+            className="cgp-input-field"
+            rows={isInputFocused ? 3 : 1}
           />
-          <span className="input-format-hint">
-            Format: {'{inputs,outputs,rows,columns,arity}([nodeFunction,input1,input2,...])([outputMapping]...)'}
-          </span>
+          <div className="input-format-container">
+            <span className="input-format-hint">
+              Format: <code>{"{inputs,outputs,rows,columns,arity,lback,funcSetSize}"}</code>
+              <code>([node]func,in1,in2,...)</code>
+              <code>(outputNode)</code>
+            </span>
+          </div>
         </div>
         <button className="reset-button" onClick={resetToDefaultExample}>
           Reset

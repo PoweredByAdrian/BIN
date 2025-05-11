@@ -11,7 +11,8 @@ import ControlPanel from './components/ControlPanel';
 import ErrorMessage from './components/ErrorMessage';
 import FileNavigator from './components/FileNavigator/FileNavigator';
 import FileListModal from './components/FileNavigator/FileListModal';
-import InfoFooter from './components/Footer/InfoFooter'; // Import the new footer component
+import InfoFooter from './components/Footer/InfoFooter';
+import CGPTester from './components/CGPTester';
 
 // Import individual hooks
 import { useCgpParser } from './hooks/useCgpParser';
@@ -33,22 +34,20 @@ function App() {
         showNodeIndices: true,
         hideInactiveNodes: false,
         hideUndefinedNodes: false,
-        showFooter: true, // Add this setting
+        showFooter: true,
     });
     
-    // Add state for hoveredNode
+    // Keep only the essential state variables
+    const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const [hoveredNode, setHoveredNode] = useState(null);
-    
-    // Rename this to be more specific - for active nodes permanent highlighting
     const [activeNodesHighlightingEnabled, setActiveNodesHighlightingEnabled] = useState(true);
+    const [showTester, setShowTester] = useState(false);
     
-    // Custom names state
+    // Custom names and functions state
     const [customNames, setCustomNames] = useState({
         inputs: {}, 
         outputs: {} 
     });
-
-    // Add custom functions state
     const [customFunctions, setCustomFunctions] = useState({});
     
     // Function to update names
@@ -96,8 +95,9 @@ function App() {
         onNodesChange, 
         onEdgesChange,
         autoAlignByDelay,
-        resetNodePositions 
-    } = useReactFlowGraph(parsedData, activeNodes, visualConfig, customNames);
+        resetNodePositions,
+    } = useReactFlowGraph(parsedData, activeNodes, visualConfig, customNames); // Removed manual nodes/edges
+    
     const { highlightedPath, highlightPathFromNode, clearHighlight } = 
         usePathHighlighting(parsedData);
 
@@ -182,9 +182,7 @@ function App() {
     // Handle restore view action
     const handleRestoreView = useCallback(() => {
         if (resetNodePositions) {
-            // Just call resetNodePositions - it handles the state update internally
             resetNodePositions();
-            // No need to call setNodes here since resetNodePositions does it
         }
     }, [resetNodePositions]);
 
@@ -235,6 +233,32 @@ function App() {
         console.log("Custom names updated:", newNames);
     }, []);
 
+    // Track node positions (keep this for internal use)
+    const onNodeDragStop = useCallback((event, node) => {
+        // We still track positions internally, but don't expose save/load
+    }, []);
+
+    // Set up event listener for configuration loading
+    useEffect(() => {
+        const handleConfigLoad = (event) => {
+            const { customNames: newNames, customFunctions: newFunctions } = event.detail;
+            
+            if (newNames) {
+                setCustomNames(newNames);
+            }
+            
+            if (newFunctions) {
+                setCustomFunctions(newFunctions);
+            }
+        };
+        
+        document.addEventListener('loadCGPConfiguration', handleConfigLoad);
+        
+        return () => {
+            document.removeEventListener('loadCGPConfiguration', handleConfigLoad);
+        };
+    }, []);
+
     return (
         <>
             <h1>CGP Viewer</h1>
@@ -244,7 +268,7 @@ function App() {
                 onStringChange={setCgpString}
                 onFileChange={handleFileChange}
                 onResetExample={resetToDefaultExample}
-                onResetNames={handleResetNames} // Add this prop
+                onResetNames={handleResetNames}
             />
             
             <ErrorMessage error={parseError || error} />
@@ -288,22 +312,24 @@ function App() {
                     />
                 </TabPane>
                 <TabPane label="Funkce">
-                    <FunkceTab />
+                    <FunkceTab 
+                        customNames={customNames}
+                        customFunctions={customFunctions}
+                    />
                 </TabPane>
                 <TabPane label="Nastavení">
                     <NastaveniTab 
                         settings={settings} 
                         onSettingChange={handleSettingChange}
-                        onAutoAlign={handleAutoAlign} // Connect the auto align handler
-                        onRestoreView={handleRestoreView} // Pass the restore function
+                        onAutoAlign={handleAutoAlign}
+                        onRestoreView={handleRestoreView}
                     />
                 </TabPane>
             </Tabs>
 
-            {/* Add footer between tabs and visualization, with consistent width */}
-            <div className="footer-container">
-                {/* Always render the footer container with the same height to prevent shifts */}
-                {settings.showFooter ? (
+            {/* Footer */}
+            {settings.showFooter && (
+                <div className="footer-container">
                     <InfoFooter 
                         hoveredNode={hoveredNode}
                         highlightedPath={highlightedPath}
@@ -311,12 +337,10 @@ function App() {
                         parsedData={parsedData}
                         customFunctions={customFunctions}
                     />
-                ) : (
-                    <div className="info-footer full-width empty"></div>
-                )}
-            </div>
+                </div>
+            )}
 
-            <div className="visualization-area" style={{ height: '600px', width: '100%', minWidth: '600px' }}>
+            <div className="visualization-area" style={{ height: '600px', width: '100%', minWidth: '600px', position: 'relative' }}>
                 {(!parseError && !error && parsedData) ? (
                     <Visualization
                         settings={settings}
@@ -326,25 +350,51 @@ function App() {
                         onNodesChange={onNodesChange}
                         onEdgesChange={onEdgesChange}
                         visualConfig={visualConfig}
-                        // Pass the highlighted path always
                         highlightedPath={highlightedPath}
-                        // Rename the prop to be more specific
                         activeNodesHighlightingEnabled={activeNodesHighlightingEnabled}
                         onToggleActiveNodesHighlighting={() => 
                             setActiveNodesHighlightingEnabled(prev => !prev)
                         }
-                        // Always pass these mouse handlers
                         onNodeMouseEnter={handleNodeHover}
                         onNodeMouseLeave={handleClearHover}
                         onPaneMouseEnter={handleClearHover}
                         customNames={customNames}
+                        onInit={setReactFlowInstance}
+                        onNodeDragStop={onNodeDragStop}
                     />
                 ) : (
-                    <div style={{ padding: '20px', color: '#abb2bf', textAlign: 'center' }}>
-                        {parseError || error ? `Cannot draw: ${parseError || error}` : 'Enter/Upload CGP string.'}
+                    <div className="visualization-placeholder">
+                        {parseError || error ? (
+                            <div className="nothing-to-visualize">
+                                Nothing to visualize
+                                <span className="subtext">Please fix the error above to see the visualization</span>
+                            </div>
+                        ) : (
+                            <div className="enter-cgp-message">Enter/Upload CGP string</div>
+                        )}
                     </div>
                 )}
             </div>
+
+            {/* Add a toggle button to show/hide the tester */}
+            <button 
+                onClick={() => setShowTester(prev => !prev)}
+                style={{ 
+                    position: 'absolute', 
+                    top: '10px', 
+                    right: '10px',
+                    background: '#2c313a',
+                    color: '#abb2bf',
+                    border: '1px solid #3e4452',
+                    borderRadius: '4px',
+                    padding: '5px 10px'
+                }}
+            >
+                {showTester ? 'Hide Tester' : 'Show Tester'}
+            </button>
+            
+            {/* Conditionally render the tester */}
+            {showTester && <CGPTester />}
         </>
     );
 }

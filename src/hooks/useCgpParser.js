@@ -14,7 +14,10 @@ export function useCgpParser(cgpString) {
             if (!cgpString || cgpString.trim() === '') {
                 return {
                     parsedData: null,
-                    parseError: "CGP string is empty.",
+                    parseError: {
+                        error: "CGP string is empty.",
+                        detail: "Please enter a valid CGP string or upload a file."
+                    },
                     activeNodes: new Set()
                 };
             }
@@ -60,15 +63,38 @@ export function useCgpParser(cgpString) {
             
             // Check if we found an actual CGP string
             if (!actualCgpString) {
-                throw new Error("No valid CGP string found. Expected format: {inputs,outputs,rows,columns,arity}([nodeFunction,input1,input2,...])([outputMapping])");
+                return {
+                    parsedData: null,
+                    parseError: {
+                        error: "No valid CGP string found.",
+                        detail: "Expected format: {inputs,outputs,rows,columns,arity,lback,funcSetSize}([nodeFunction,input1,input2,...])([outputMapping])"
+                    },
+                    activeNodes: new Set()
+                };
             }
 
             // Parse the actual CGP string
             const result = parseCGPString(actualCgpString);
             
+            // Check if parsing returned an error
+            if (result.error) {
+                return {
+                    parsedData: null,
+                    parseError: result, // Pass the complete error object with details
+                    activeNodes: new Set()
+                };
+            }
+            
             // Verify that parsing produced a valid result
             if (!result || !result.config) {
-                throw new Error("Failed to parse CGP configuration. Please check the format.");
+                return {
+                    parsedData: null,
+                    parseError: {
+                        error: "Failed to parse CGP configuration.",
+                        detail: "Please check the format of your CGP string."
+                    },
+                    activeNodes: new Set()
+                };
             }
             
             // Validate that the i/o names match the parsed config
@@ -138,7 +164,14 @@ export function useCgpParser(cgpString) {
             
         } catch (error) {
             console.error("Failed to parse CGP string:", error);
-            return { parsedData: null, parseError: error.message || "Unknown parsing error", activeNodes: new Set() };
+            return { 
+                parsedData: null, 
+                parseError: {
+                    error: "Parsing error",
+                    detail: error.message || "Unknown parsing error occurred."
+                }, 
+                activeNodes: new Set() 
+            };
         }
     }, [cgpString]);
 }
