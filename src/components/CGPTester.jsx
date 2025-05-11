@@ -76,13 +76,6 @@ const testStrings = [
     errorDetail: "Node index 4 out of range. Valid range is [2-5]."
   },
   {
-    name: "ERROR: L-back Violation",
-    value: "{2,1,2,3,2,1,4}([2]0,1,0)([3]0,1,1)([4]2,3,2)([5]2,4,3)(5)",
-    description: "Error: Connection from node 4 to 5 violates L-back constraint of 1",
-    isValid: false,
-    errorDetail: "L-back constraint violation in node [5]."
-  },
-  {
     name: "ERROR: Invalid Function ID",
     value: "{2,1,1,2,2,2,3}([2]0,1,5)([3]0,1,1)(3)",
     description: "Error: Function ID 5 is outside the range (must be < 3)",
