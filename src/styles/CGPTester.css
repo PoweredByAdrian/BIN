@@ -30,6 +30,13 @@
   border: 1px solid #3e4452;
   border-radius: 4px;
   padding: 15px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.test-string-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .test-string-header {
@@ -61,6 +68,7 @@
   font-size: 13px;
   color: #98c379;
   margin: 0;
+  position: relative;
 }
 
 .copy-button {
@@ -218,4 +226,43 @@
 
 .preview-button:hover {
   background-color: #78bcf7;
+}
+
+.error-category-header {
+  color: #e06c75;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(224, 108, 117, 0.3);
+  padding-bottom: 8px;
+}
+
+.error-category-description {
+  color: #abb2bf;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.error-string-item {
+  border-left: 4px solid #e06c75;
+  background-color: rgba(224, 108, 117, 0.05);
+}
+
+.error-value {
+  color: #e06c75 !important; /* Red text for error values */
+  background-color: rgba(224, 108, 117, 0.1);
+}
+
+.expected-error {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #e06c75;
+  background-color: rgba(224, 108, 117, 0.05);
+  padding: 8px 10px;
+  border-radius: 4px;
+  border-left: 2px solid #e06c75;
+}
+
+.test-categories h3 {
+  margin-top: 20px;
+  color: #e6e6e6;
 }

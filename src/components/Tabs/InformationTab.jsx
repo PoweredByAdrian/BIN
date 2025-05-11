@@ -271,13 +271,17 @@ function InformationTab({
     const extraBlocks = totalGridSlots - activeNodeCount - definedNodesCount;
     
     // Create input and output name arrays from config and customNames
-    // Using default names when no custom names are provided
+    // Using file-provided names when available, then custom names, then default names
     const inputNames = Array.from({ length: config.inputs }, (_, i) => 
-        customNames.inputs[i] || `Input ${i}`
+        customNames.inputs[i] || 
+        (parsedData.inputNames && parsedData.inputNames[i]) || 
+        `Input ${i}`
     );
-    
+
     const outputNames = Array.from({ length: config.outputs }, (_, i) => 
-        customNames.outputs[i] || `Output ${i}`
+        customNames.outputs[i] || 
+        (parsedData.outputNames && parsedData.outputNames[i]) || 
+        `Output ${i}`
     );
     
     // Handle name changes
@@ -383,11 +387,6 @@ function InformationTab({
                 <NestedTabPanel label="I/O Names">
                     {hasIONames ? (
                         <div className="names-container">
-                            {/* Instruction note */}
-                            <div className="edit-names-instruction">
-                                <p><i>Click on any name to edit it</i></p>
-                            </div>
-
                             {/* Input Names */}
                             {config.inputs > 0 && (
                                 <div className="names-column">

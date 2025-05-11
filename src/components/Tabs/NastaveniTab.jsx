@@ -81,9 +81,6 @@ function NastaveniTab({ settings, onSettingChange, onAutoAlign, onRestoreView })
                     </button>
                 </div>
             </div>
-
-            <hr style={{border: 'none', borderTop: '1px solid #4f5666', margin: '15px 0'}}/>
-            <p><em>More settings like Schematic Symbols, Display Modes, Footer will go here.</em></p>
         </div>
     );
 }

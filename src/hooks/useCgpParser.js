@@ -1,3 +1,16 @@
+/**
+ * Custom hook for CGP string parsing
+ * 
+ * This hook processes CGP strings, extracting:
+ * - Configuration parameters (inputs, outputs, rows, columns, etc.)
+ * - Node definitions and connections
+ * - Input/output node names from comment directives
+ * - Active nodes (nodes that contribute to output)
+ * - Node computation delays
+ * 
+ * It handles both raw CGP strings and those with comment directives like #%i and #%o
+ * for specifying input and output names.
+ */
 import { useState, useEffect, useMemo } from 'react';
 import { parseCGPString } from '../utils/cgpParser';
 import { findActiveNodes } from '../utils/cgpNodeAnalyzer';
@@ -11,6 +24,7 @@ import { findActiveNodes } from '../utils/cgpNodeAnalyzer';
 export function useCgpParser(cgpString) {
     return useMemo(() => {
         try {
+            // Handle empty input case
             if (!cgpString || cgpString.trim() === '') {
                 return {
                     parsedData: null,
@@ -37,21 +51,15 @@ export function useCgpParser(cgpString) {
                     // Extract input names - format: #%i name1,name2,name3
                     const nameStr = line.substring(line.indexOf(' ') + 1).trim();
                     const names = nameStr.split(',').map(name => name.trim());
-                    // Handle reversed indices - look for patterns like "i4,i3,i2,i1,i0"
-                    const isReversed = names.length > 1 && names.some(n => /i\d+/.test(n)) && 
-                        parseInt(names[0].match(/\d+/)?.[0] || '0') > 
-                        parseInt(names[names.length-1].match(/\d+/)?.[0] || '0');
                     
-                    if (isReversed) {
-                        // If indices appear to be reversed, store them in reverse order
-                        inputNames.push(...names.reverse());
-                    } else {
-                        inputNames.push(...names);
-                    }
+                    // Process names in the specified order
+                    // (index 0 = first input, index 1 = second input, etc.)
+                    inputNames.push(...names);
                 } 
                 else if (line.startsWith('#%o')) {
                     // Extract output names - format: #%o name1,name2,name3
                     const nameStr = line.substring(line.indexOf(' ') + 1).trim();
+                    // Process output names in the specified order
                     outputNames.push(...nameStr.split(',').map(name => name.trim()));
                 }
                 else if (!line.startsWith('#')) {
@@ -99,7 +107,7 @@ export function useCgpParser(cgpString) {
             
             // Validate that the i/o names match the parsed config
             if (inputNames.length > 0 || outputNames.length > 0) {
-                // Both #%i and #%o should be present if either is used
+                // Log warnings for missing name sets
                 if (inputNames.length === 0) {
                     console.warn("Warning: Output names were provided but input names are missing.");
                 }
@@ -107,7 +115,7 @@ export function useCgpParser(cgpString) {
                     console.warn("Warning: Input names were provided but output names are missing.");
                 }
                 
-                // Check if number of names matches the config
+                // Handle mismatch between number of names and config inputs
                 if (inputNames.length > 0 && inputNames.length !== result.config.inputs) {
                     console.warn(`Warning: Number of input names (${inputNames.length}) doesn't match the CGP inputs count (${result.config.inputs}).`);
                     
@@ -123,6 +131,7 @@ export function useCgpParser(cgpString) {
                     }
                 }
                 
+                // Handle mismatch between number of names and config outputs
                 if (outputNames.length > 0 && outputNames.length !== result.config.outputs) {
                     console.warn(`Warning: Number of output names (${outputNames.length}) doesn't match the CGP outputs count (${result.config.outputs}).`);
                     
@@ -143,13 +152,14 @@ export function useCgpParser(cgpString) {
             result.inputNames = inputNames.length > 0 ? inputNames : Array(result.config.inputs).fill(null).map((_, i) => `Input ${i}`);
             result.outputNames = outputNames.length > 0 ? outputNames : Array(result.config.outputs).fill(null).map((_, i) => `Output ${i}`);
             
+            // Find active nodes that contribute to outputs
             const activeNodes = findActiveNodes(
                 result.config, 
                 result.nodeDefinitions, 
                 result.outputNodeIndices
             );
 
-            // Add a check before calculating delays
+            // Calculate node computational delays
             const nodeDelays = result && result.nodeDefinitions ? 
                 calculateNodeDelays(result) : {};
             
@@ -176,6 +186,13 @@ export function useCgpParser(cgpString) {
     }, [cgpString]);
 }
 
+/**
+ * Calculates computational delay for each node in the CGP circuit.
+ * Delay represents the number of computational steps from inputs.
+ * 
+ * @param {Object} parsedData - Parsed CGP data structure
+ * @returns {Object} - Map of node IDs to their delay values
+ */
 function calculateNodeDelays(parsedData) {
     if (!parsedData || !parsedData.nodeDefinitions) return {};
     
@@ -208,6 +225,15 @@ function calculateNodeDelays(parsedData) {
     return delays;
 }
 
+/**
+ * Recursively calculates the delay for a specific node
+ * 
+ * @param {string} nodeId - ID of the node to calculate delay for
+ * @param {Map} nodeDefinitions - Map of node definitions
+ * @param {Object} delays - Object storing calculated delays for memoization
+ * @param {number} inputCount - Number of primary inputs
+ * @returns {number} - The calculated delay value
+ */
 function getNodeDelay(nodeId, nodeDefinitions, delays, inputCount) {
     // Return cached value if already calculated
     if (delays[nodeId] !== undefined) {
@@ -224,7 +250,7 @@ function getNodeDelay(nodeId, nodeDefinitions, delays, inputCount) {
             return 0;
         }
         
-        // For computational nodes, add 1 to their delay
+        // For computational nodes, recursively get their delay + 1
         return getNodeDelay(String(inputId), nodeDefinitions, delays, inputCount) + 1;
     });
     
