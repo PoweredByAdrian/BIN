@@ -68,7 +68,7 @@ function App() {
     // ==================== UI STATE ====================
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const [hoveredNode, setHoveredNode] = useState(null);
-    const [activeNodesHighlightingEnabled, setActiveNodesHighlightingEnabled] = useState(true);
+    const [activeNodesHighlightingEnabled, setActiveNodesHighlightingEnabled] = useState(false);
     const [showTester, setShowTester] = useState(false);
     
     // ==================== CUSTOM NAMING STATE ====================
